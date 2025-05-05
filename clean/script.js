@@ -43,19 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "-=0.5"
     );
 
-  // Mystery Button Logic
-  const mysteryButton = document.getElementById("mystery-button");
-  const mysteryLinks = [
-    "https://facebook.com/yourprofile",
-    "https://instagram.com/yourprofile",
-    "https://twitter.com/yourprofile",
-  ];
-
-  mysteryButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    const randomIndex = Math.floor(Math.random() * mysteryLinks.length);
-    window.open(mysteryLinks[randomIndex], "_blank");
-  });
+  // Removed all word spawning logic
 
   // Smooth scrolling
   const links = document.querySelectorAll('a[href^="#"]');
