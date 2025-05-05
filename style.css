@@ -13,7 +13,7 @@ body {
 
 body {
     font-family: "Pixelify Sans", sans-serif;
-    background: #161219;
+    background: #fff8dd;
     height: 100dvh;
     width: 100dvw;
     position: relative;
@@ -22,7 +22,7 @@ body {
 #background {
     height: calc(100dvh - 2.5rem);
     width: calc(100dvw - 2.5rem);
-    background: #b795c9;
+    background: #161219;
     border-radius: 50px;
     position: absolute;
     top: 50%;
@@ -46,6 +46,47 @@ body {
     /* Above background */
 }
 
+#m_group{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2.5rem;
+    mix-blend-mode: difference;
+}
+
+.info {
+    font-size: 1.5rem;
+    color: #fff8dd;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.tooltip {
+    position: absolute;
+    background: #fff8dd;
+    color: #161219;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 1000;
+    box-shadow: 0 -15px 50px 0 #161219;
+}
+
+#age {
+    font-size: 1.5rem;
+    background: #fff8dd;
+    padding: 0 5px;
+    border-radius: 5px;
+    margin-right: 5px;
+    color: #161219;
+    text-align: center;
+    margin-top: 20px;
+}
+
 #bokaif_img {
     width: 50vw;
     max-width: 500px;
@@ -55,12 +96,13 @@ body {
 
 #footer {
     position: absolute;
-    bottom: 40px;
+    bottom: 2.75rem;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 2;
+    padding: 0 2.5rem;
     /* Above all other elements */
 }
 
@@ -68,10 +110,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     gap: 15px;
     font-size: 1rem;
-    color: #333;
-    /* Dark color for text */
 }
 
 .social-item {
@@ -82,40 +123,40 @@ body {
 }
 
 .social-item a {
-    color: #333;
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
-    font-size: 1.2rem;
-    border-radius: 8px;
+    font-size: 1.8rem;
+    border-radius: 50%;
     padding: 5px;
 }
 
 .social-item a:hover {
     background: #161219;
-    color: #b795c9;
+    color: #fff8dd;
+    transform: scale(1.05);
 }
 
 .sp a{
-    border: 1px dashed #161219;
-    color: #161219;
+    border: 1px dashed #fff8dd;
+    color: #fff8dd;
 }
 
 .sp2 a {
-    border: 1px dashed #161219;
-    color: #161219;
+    border: 1px dashed #fff8dd;
+    color: #fff8dd;
 }
 
 .separator {
-    color: #333;
+    color: #fff8dd;
     font-size: 1.2rem;
 }
 
 /* Adjust Iconify icons size */
 .iconify {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
 }
 
 /* Removed styles related to word-container and random-word */
@@ -174,5 +215,112 @@ body {
 
     90% {
         transform: translate(-3%, -3%);
+    }
+}
+
+#random-photos {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1; /* Place behind main content and footer */
+}
+
+.random-photo {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 3rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    will-change: transform, opacity;
+    filter: brightness(1.1) contrast(1.1);
+    transform-origin: center center;
+    transform: scale(0.8) rotate(0deg);
+    z-index: 0; /* Ensure photos stay behind other content */
+}
+
+.random-photo.visible {
+    opacity: 0.9;
+    transform: scale(1) rotate(var(--rotation, 0deg));
+}
+
+.random-photo.fading {
+    opacity: 0;
+    transform: scale(0.8) rotate(var(--rotation, 0deg));
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0.8) rotate(var(--rotation, 0deg));
+    }
+    50% {
+        transform: scale(1.1) rotate(var(--rotation, 0deg));
+    }
+    100% {
+        transform: scale(1) rotate(var(--rotation, 0deg));
+    }
+}
+
+/* Remove the left/right rotation classes as we're using dynamic rotation now */
+.random-photo.left,
+.random-photo.right {
+    transform: none;
+}
+
+#mystery-button {
+    background: none;
+    border: 1px dashed #fff8dd;
+    background: #fff8dd;
+    color: #161219;
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: 1.2rem;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+#mystery-button:hover {
+    transform: scale(1.05);
+}
+
+#mystery-button .iconify {
+    font-size: 1.5rem;
+}
+
+.cycle {
+    transition: opacity 0.5s ease-in-out;
+    display: inline-block;
+    min-width: 200px;
+    text-align: center;
+}
+
+.email-icon,
+.check-icon {
+    transition: opacity 0.3s ease;
+}
+
+/* Hide separators when container wraps */
+@media (max-width: 535px) {
+    .social-container {
+        gap: 10px;
+    }
+    
+    .separator {
+        display: none;
+    }
+    
+    .social-item {
+        margin: 5px;
     }
 }
