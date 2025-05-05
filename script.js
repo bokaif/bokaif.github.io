@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const photo = document.createElement("img");
     photo.classList.add("random-photo");
     const photoNumber = Math.floor(Math.random() * totalPhotos) + 1;
-    photo.src = `${photoNumber}.png`;
+    photo.src = `images/${photoNumber}.png`;
     return photo;
   }
 
