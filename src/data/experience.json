@@ -14,7 +14,12 @@
             "location": "Ontario, Canada (Remote)",
             "date": "Dec 2024 — Present",
             "tech": ["Python", "React", "Next", "OpenAI", "Twilio", "FastAPI", "Firebase", "GCP", "Supabase"],
-            "description": "Architect and deploy full-stack web systems, from AI-driven restaurant operations to internal developer tooling, with a strong focus on scalable APIs, agent infrastructure, and real-time voice workflows."
+            "description": "Architect and deploy full-stack web systems, from AI-driven restaurant operations to internal developer tooling, with a strong focus on scalable APIs, agent infrastructure, and real-time voice workflows.",
+            "highlights": [
+              "Built and shipped AI-driven restaurant operations tools in production.",
+              "Architected scalable APIs and agent infrastructure for internal products.",
+              "Delivered real-time voice workflows across full-stack systems."
+            ]
           },
           {
             "title": "Software Development Engineer",
@@ -22,7 +27,12 @@
             "organization": "MegaMind Tech",
             "location": "Ontario, Canada (Remote)",
             "tech": ["Python", "TensorFlow", "YOLO", "Jetson Nano", "OpenCV", "MongoDB", "Redis"],
-            "description": "Led a large-scale refactor across core systems, redesigned the UI layer with Eel, and shipped computer-vision and analytics features that improved kiosk performance, usability, and maintainability."
+            "description": "Led a large-scale refactor across core systems, redesigned the UI layer with Eel, and shipped computer-vision and analytics features that improved kiosk performance, usability, and maintainability.",
+            "highlights": [
+              "Led a large-scale refactor across core kiosk systems.",
+              "Redesigned the UI layer with Eel to improve usability.",
+              "Shipped computer-vision and analytics features that improved maintainability."
+            ]
           },
           {
             "title": "Software Development Engineer Intern",
@@ -30,7 +40,12 @@
             "organization": "MegaMind Tech",
             "location": "Ontario, Canada (Remote)",
             "tech": ["Python", "ONNX", "Machine Learning", "PyTorch"],
-            "description": "Built kiosk management dashboards and trained a wake-word ONNX model that reached 99.48% real-time accuracy, helping solve a key voice activation problem."
+            "description": "Built kiosk management dashboards and trained a wake-word ONNX model that reached 99.48% real-time accuracy, helping solve a key voice activation problem.",
+            "highlights": [
+              "Built management dashboards for kiosk operations.",
+              "Trained a wake-word ONNX model with 99.48% real-time accuracy.",
+              "Improved voice activation reliability for production usage."
+            ]
           }
         ]
       },
@@ -40,39 +55,39 @@
         "description": "Teaching, mentoring, and creative direction outside the core engineering track.",
         "items": [
           {
-            "tag": "Mental Health",
+            "tag": "Non-Profit",
             "date": "Apr 2021 — Present",
             "title": "Co-Founder",
             "organization": "Amra Shunbo",
-            "location": "Bangladesh"
+            "description": "Co-founded Bangladesh's first P2P anonymous mental health support platform."
           },
           {
-            "tag": "Stanford",
+            "tag": "Mentorship",
             "date": "Apr 2024 — Jun 2024",
             "title": "Section Leader",
             "organization": "Code in Place — Stanford University",
-            "location": "Remote"
+            "description": "Mentored beginner programmers in CS106A."
           },
           {
-            "tag": "Publications",
+            "tag": "IT Club",
             "date": "Apr 2023 — Jun 2024",
-            "title": "President of Publications",
+            "title": "President, Dept. of Publications",
             "organization": "Notre Dame Information Technology Club",
-            "location": "Dhaka, Bangladesh"
+            "description": "Led design & content wing of club."
           },
           {
             "tag": "Math Club",
             "date": "Jul 2023 — May 2024",
             "title": "Vice President, Dept. of IT",
             "organization": "Notre Dame Math Club",
-            "location": "Dhaka, Bangladesh"
+            "description": "Directed IT and logistics for club activities."
           },
           {
             "tag": "Technology",
             "date": "Jun 2020 — Oct 2021",
             "title": "General Secretary",
-            "organization": "Ideal Association of Informatics and Technology - IAIT",
-            "location": "Bangladesh"
+            "organization": "Ideal Association of Informatics & Technology",
+            "description": "Managed operations and organized tech events."
           }
         ]
       },

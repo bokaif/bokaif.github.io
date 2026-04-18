@@ -873,13 +873,48 @@ body {
     margin-bottom: 0.7rem;
 }
 
-.timeline-tech span {
+.timeline-tech-chip {
     font-size: 0.72rem;
     padding: 0.2rem 0.55rem;
     border-radius: 999px;
     background: rgba(255, 248, 221, 0.06);
     border: 1px solid rgba(255, 248, 221, 0.08);
-    opacity: 0.65;
+    opacity: 0.52;
+}
+
+.timeline-tech-hidden {
+    display: none;
+}
+
+.timeline-tech.is-expanded .timeline-tech-hidden {
+    display: inline-flex;
+}
+
+.timeline-tech-overflow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: rgba(255, 248, 221, 0.06);
+    border: 1px solid rgba(255, 248, 221, 0.12);
+    color: #fff8dd;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+.timeline-tech-toggle {
+    cursor: pointer;
+    font-family: inherit;
+    line-height: 1;
+    transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.timeline-tech-toggle:hover {
+    opacity: 0.95;
+    border-color: rgba(255, 248, 221, 0.22);
+    transform: translateY(-1px);
 }
 
 .leadership-tech {
@@ -898,11 +933,18 @@ body {
     opacity: 0.65;
 }
 
-.timeline-desc {
-    font-size: 1rem;
-    line-height: 1.95;
-    opacity: 0.6;
+.timeline-highlights {
+    margin: 0;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.45rem;
     max-width: 560px;
+}
+
+.timeline-highlights li {
+    font-size: 0.96rem;
+    line-height: 1.65;
+    opacity: 0.58;
 }
 
 .leadership-group {
@@ -912,7 +954,7 @@ body {
 .leadership-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
+    gap: 0.75rem;
 }
 
 .leadership-card,
@@ -920,54 +962,64 @@ body {
     background: rgba(255, 248, 221, 0.04);
     border: 1px solid rgba(255, 248, 221, 0.08);
     border-radius: 22px;
-    padding: 1.25rem;
+    padding: 1rem;
 }
 
 .leadership-card {
+    display: block;
+    min-height: 100%;
+}
+
+.leadership-copy {
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    min-height: 100%;
+    gap: 0.25rem;
 }
 
 .leadership-card-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.75rem;
-    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.35rem;
 }
 
 .leadership-tag {
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    padding: 0.18rem 0.5rem;
+    padding: 0.14rem 0.44rem;
     border-radius: 999px;
     background: rgba(255, 248, 221, 0.1);
     opacity: 0.8;
 }
 
 .leadership-date {
-    font-size: 0.78rem;
+    font-size: 0.74rem;
     opacity: 0.35;
+    margin: 0;
 }
 
 .leadership-card h3 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
     letter-spacing: -0.01em;
+    line-height: 1.25;
 }
 
 .leadership-org {
-    font-size: 0.88rem;
+    font-size: 0.84rem;
     opacity: 0.45;
+    line-height: 1.4;
+    margin: 0.1rem 0 0;
 }
 
 .leadership-desc {
-    font-size: 0.95rem;
-    line-height: 1.65;
+    font-size: 0.82rem;
+    line-height: 1.45;
     opacity: 0.58;
+    margin-top: 0.35rem;
 }
 
 

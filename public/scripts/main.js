@@ -225,6 +225,22 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   document.querySelectorAll(".section-card").forEach((card) => cardObserver.observe(card));
 
+  function toggleTimelineTech(button) {
+    const techGroup = button.closest(".timeline-tech");
+    if (!techGroup) return;
+
+    const isExpanded = techGroup.classList.toggle("is-expanded");
+    button.setAttribute("aria-expanded", String(isExpanded));
+    button.textContent = isExpanded ? "less" : (button.dataset.collapsedLabel || "+0");
+  }
+
+  document.addEventListener("click", (event) => {
+    const button = event.target.closest(".timeline-tech-toggle");
+    if (!button) return;
+    event.preventDefault();
+    toggleTimelineTech(button);
+  });
+
   if (scrollRoot && sectionNavItems.length > 0) {
     const navObserver = new IntersectionObserver(
       (entries) => {

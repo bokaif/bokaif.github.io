@@ -3,6 +3,7 @@ import data from "../data/experience.json";
 
 const { experienceSection } = data;
 const { experienceGroup, leadershipGroup, sidebar } = experienceSection.layout;
+const MAX_TECH_TAGS = 5;
 ---
 
 <section class="panel section-card">
@@ -21,29 +22,48 @@ const { experienceGroup, leadershipGroup, sidebar } = experienceSection.layout;
         </div>
 
         <div class="timeline">
-          {experienceGroup.items.map((item, index) => (
-            <div class="timeline-entry">
-              <div class="timeline-marker">
-                <span class:list={["timeline-dot", { "active-dot": index === 0 }]}></span>
-                {index < experienceGroup.items.length - 1 && <span class="timeline-line"></span>}
-              </div>
-              <div class="timeline-content">
-                <div class="timeline-header">
-                  <h3>{item.title}</h3>
-                  {item.badge ? (
-                    <span class="timeline-badge">{item.badge}</span>
-                  ) : (
-                    <span class="timeline-date">{item.date}</span>
-                  )}
+          {experienceGroup.items.map((item, index) => {
+            const hiddenTechCount = Math.max(0, item.tech.length - MAX_TECH_TAGS);
+            const highlights = item.highlights && item.highlights.length ? item.highlights : [item.description];
+
+            return (
+              <div class="timeline-entry">
+                <div class="timeline-marker">
+                  <span class:list={["timeline-dot", { "active-dot": index === 0 }]}></span>
+                  {index < experienceGroup.items.length - 1 && <span class="timeline-line"></span>}
                 </div>
-                <p class="timeline-org">{item.organization} · {item.location} · {item.date}</p>
-                <div class="timeline-tech" aria-label="Tech stack">
-                  {item.tech.map((tech) => <span>{tech}</span>)}
+                <div class="timeline-content">
+                  <div class="timeline-header">
+                    <h3>{item.title}</h3>
+                    {item.badge ? (
+                      <span class="timeline-badge">{item.badge}</span>
+                    ) : (
+                      <span class="timeline-date">{item.date}</span>
+                    )}
+                  </div>
+                  <p class="timeline-org">{item.organization} · {item.location} · {item.date}</p>
+                  <div class="timeline-tech" aria-label="Tech stack">
+                    {item.tech.map((tech, techIndex) => (
+                      <span class:list={["timeline-tech-chip", { "timeline-tech-hidden": techIndex >= MAX_TECH_TAGS }]}>{tech}</span>
+                    ))}
+                    {hiddenTechCount > 0 && (
+                      <button
+                        type="button"
+                        class="timeline-tech-overflow timeline-tech-toggle"
+                        data-collapsed-label={`+${hiddenTechCount}`}
+                        aria-expanded="false"
+                      >
+                        +{hiddenTechCount}
+                      </button>
+                    )}
+                  </div>
+                  <ul class="timeline-highlights">
+                    {highlights.map((highlight) => <li>{highlight}</li>)}
+                  </ul>
                 </div>
-                <p class="timeline-desc">{item.description}</p>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
@@ -57,18 +77,20 @@ const { experienceGroup, leadershipGroup, sidebar } = experienceSection.layout;
         <div class="leadership-grid">
           {leadershipGroup.items.map((item) => (
             <article class="leadership-card">
-              <div class="leadership-card-top">
-                <span class="leadership-tag">{item.tag}</span>
-                <span class="leadership-date">{item.date}</span>
-              </div>
-              <h3>{item.title}</h3>
-              <p class="leadership-org">{item.organization} · {item.location}</p>
-              {item.tech && (
-                <div class="leadership-tech" aria-label="Skills">
-                  {item.tech.map((tech) => <span>{tech}</span>)}
+              <div class="leadership-copy">
+                <div class="leadership-card-top">
+                  <span class="leadership-tag">{item.tag}</span>
+                  <p class="leadership-date">{item.date}</p>
                 </div>
-              )}
-              {item.description && <p class="leadership-desc">{item.description}</p>}
+                <h3>{item.title}</h3>
+                <p class="leadership-org">{item.organization}</p>
+                {item.tech && (
+                  <div class="leadership-tech" aria-label="Skills">
+                    {item.tech.map((tech) => <span>{tech}</span>)}
+                  </div>
+                )}
+                {item.description && <p class="leadership-desc">{item.description}</p>}
+              </div>
             </article>
           ))}
         </div>
