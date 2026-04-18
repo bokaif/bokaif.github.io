@@ -1,17 +1,59 @@
 <section class="panel section-card">
-  <h2 class="section-title">projects</h2>
+  <div class="section-label-row">
+    <span class="section-label-dot"></span>
+    <span class="section-label-text">Projects</span>
+  </div>
+
   <div class="projects-grid">
-    <article class="project-card">
-      <h3>yobo ai</h3>
-      <p>ai product work with personality, speed, and clean execution.</p>
-    </article>
-    <article class="project-card">
-      <h3>portfolio v2</h3>
-      <p>vanilla js experiment in playful but readable interfaces.</p>
-    </article>
-    <article class="project-card">
-      <h3>next drop</h3>
-      <p>[replace with your next real project]</p>
-    </article>
+    <a href="#" class="project-card project-featured">
+      <div class="project-top">
+        <span class="iconify project-icon" data-icon="solar:planet-bold-duotone"></span>
+        <span class="project-tag">NASA</span>
+      </div>
+      <h3>Landsat Lens</h3>
+      <p>Visualized real-time Landsat satellite paths using NASA Celestrak data and interactive Leaflet maps, with email alerts for upcoming passes.</p>
+      <div class="project-tech">
+        <span>Python</span>
+        <span>Flask</span>
+        <span>React</span>
+        <span>Firebase</span>
+        <span>Leaflet</span>
+      </div>
+    </a>
+
+    <a href="#" class="project-card">
+      <div class="project-top">
+        <span class="iconify project-icon" data-icon="solar:rocket-bold-duotone"></span>
+        <span class="project-tag">JAXA</span>
+      </div>
+      <h3>Astrobee Controller</h3>
+      <p>Controlled Astrobee robot movement using Quaternions on the ISS via KIBO API. Trained a TensorFlow model to detect 8 tools + AR codes.</p>
+      <div class="project-tech">
+        <span>Java</span>
+        <span>TensorFlow</span>
+        <span>Docker</span>
+        <span>ZXing</span>
+      </div>
+    </a>
+
+    <a href="https://bokaif.github.io" class="project-card">
+      <div class="project-top">
+        <span class="iconify project-icon" data-icon="solar:code-bold-duotone"></span>
+      </div>
+      <h3>Portfolio v2</h3>
+      <p>This site. A bespoke portfolio with grain textures, squircle avatars, and dreamy GSAP transitions.</p>
+      <div class="project-tech">
+        <span>Astro</span>
+        <span>GSAP</span>
+        <span>Vanilla CSS</span>
+      </div>
+    </a>
+
+    <a href="#" class="project-card project-cta-card">
+      <div class="project-cta-inner">
+        <span class="iconify" data-icon="solar:add-circle-bold-duotone"></span>
+        <p>More coming soon</p>
+      </div>
+    </a>
   </div>
 </section>

@@ -51,6 +51,55 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  const sectionNavLinks = Array.from(
+    document.querySelectorAll('#floating-nav a[href^="#"]')
+  );
+  const sectionNavItems = sectionNavLinks
+    .map((link) => {
+      const id = link.getAttribute("href")?.slice(1);
+      const section = id ? document.getElementById(id) : null;
+      if (!id || !section) return null;
+      return { link, section };
+    })
+    .filter(Boolean);
+  const sectionVisibility = new Map(
+    sectionNavItems.map((item) => [item.section.id, 0])
+  );
+
+  function setActiveSectionNav(activeId) {
+    sectionNavItems.forEach((item) => {
+      item.link.classList.toggle("active", item.section.id === activeId);
+    });
+  }
+
+  function updateActiveSectionNav() {
+    if (!scrollRoot || sectionNavItems.length === 0) return;
+
+    const visibleEntries = sectionNavItems
+      .map((item) => ({
+        id: item.section.id,
+        ratio: sectionVisibility.get(item.section.id) ?? 0,
+      }))
+      .filter((item) => item.ratio > 0);
+
+    if (visibleEntries.length > 0) {
+      visibleEntries.sort((a, b) => b.ratio - a.ratio);
+      setActiveSectionNav(visibleEntries[0].id);
+      return;
+    }
+
+    const navTrigger = scrollRoot.scrollTop + scrollRoot.clientHeight * 0.45;
+    let activeId = sectionNavItems[0].section.id;
+
+    for (const item of sectionNavItems) {
+      if (navTrigger >= item.section.offsetTop) {
+        activeId = item.section.id;
+      }
+    }
+
+    setActiveSectionNav(activeId);
+  }
+
   const track = document.getElementById("scrollbar-track");
   const thumb = document.getElementById("scrollbar-thumb");
   const scrollbar = document.querySelector(".custom-scrollbar");
@@ -120,6 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (scrollRoot && track) {
     scrollRoot.addEventListener("scroll", () => {
       updateThumb();
+      updateActiveSectionNav();
       flashScrollbar();
     }, { passive: true });
   }
@@ -151,7 +201,10 @@ document.addEventListener("DOMContentLoaded", () => {
     flashScrollbar();
   });
 
-  const runUpdate = () => requestAnimationFrame(() => updateThumb());
+  const runUpdate = () => requestAnimationFrame(() => {
+    updateThumb();
+    updateActiveSectionNav();
+  });
   runUpdate();
   window.addEventListener("resize", runUpdate);
   if (scrollRoot) {
@@ -168,9 +221,27 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     },
-    { root: scrollRoot, threshold: 0.18 }
+    { root: scrollRoot, threshold: 0.18, rootMargin: "0px 0px -100px 0px" }
   );
   document.querySelectorAll(".section-card").forEach((card) => cardObserver.observe(card));
+
+  if (scrollRoot && sectionNavItems.length > 0) {
+    const navObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          sectionVisibility.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0);
+        });
+        updateActiveSectionNav();
+      },
+      {
+        root: scrollRoot,
+        threshold: [0, 0.2, 0.35, 0.5, 0.65, 0.8, 1],
+        rootMargin: "-12% 0px -42% 0px",
+      }
+    );
+
+    sectionNavItems.forEach((item) => navObserver.observe(item.section));
+  }
 
   const birthDate = new Date("2004-02-26");
   const ageElement = document.getElementById("age");
@@ -201,10 +272,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const cycleElement = document.querySelector(".cycle");
   const funFacts = [
-    "founding engineer @yobo ai",
-    "cs @brac university",
-    "software developer",
-    "graphic designer",
+    "Software Engineer @Yobo AI",
+    "CS @BRAC University",
+    "Stanford Section Leader",
+    "Kibo Robot Challenge Champion",
   ];
   let cycleIndex = 1;
   if (cycleElement) {
@@ -305,6 +376,104 @@ document.addEventListener("DOMContentLoaded", () => {
       topbar.classList.toggle("visible", scrollRoot.scrollTop > heroBottom * 0.65);
     }, { passive: true });
   }
+
+  // --- Shared avatar dreamy crossfade cycle ---
+  const avatarImages = ["/images/1.png", "/images/2.png", "/images/3.png", "/images/4.png", "/images/5.png"];
+  const avatarCache = new Map();
+
+  function loadAvatarImage(src) {
+    const existing = avatarCache.get(src);
+    if (existing) return existing;
+
+    const image = new Image();
+    image.decoding = "async";
+    image.loading = "eager";
+    image.src = src;
+
+    const ready = new Promise((resolve, reject) => {
+      const finish = () => {
+        if (typeof image.decode === "function") {
+          image.decode().catch(() => {}).finally(resolve);
+          return;
+        }
+        resolve();
+      };
+
+      if (image.complete) {
+        finish();
+        return;
+      }
+
+      image.addEventListener("load", finish, { once: true });
+      image.addEventListener("error", reject, { once: true });
+    });
+
+    avatarCache.set(src, ready);
+    return ready;
+  }
+
+  avatarImages.forEach((src) => {
+    loadAvatarImage(src).catch(() => {
+      avatarCache.delete(src);
+    });
+  });
+
+  function startAvatarCycle(backSelector, frontSelector) {
+    const avatarBack = document.querySelector(backSelector);
+    const avatarFront = document.querySelector(frontSelector);
+    if (!avatarBack || !avatarFront) return;
+
+    let avatarIndex = 0;
+    let isAnimating = false;
+
+    async function dreamSwap() {
+      if (isAnimating) return;
+      isAnimating = true;
+      const nextIndex = (avatarIndex + 1) % avatarImages.length;
+      const nextImage = avatarImages[nextIndex];
+
+      try {
+        await loadAvatarImage(nextImage);
+      } catch {
+        isAnimating = false;
+        return;
+      }
+
+      avatarFront.src = nextImage;
+
+      gsap.killTweensOf([avatarBack, avatarFront]);
+      gsap.set(avatarFront, {
+        opacity: 0,
+        filter: "blur(14px) grayscale(0.3) contrast(1.05)",
+        willChange: "opacity, filter"
+      });
+      gsap.set(avatarBack, { willChange: "opacity, filter" });
+
+      gsap.timeline({
+        onComplete: () => {
+          avatarBack.src = nextImage;
+          gsap.set(avatarFront, {
+            opacity: 0,
+            clearProps: "filter,willChange"
+          });
+          gsap.set(avatarBack, { clearProps: "willChange" });
+          avatarIndex = nextIndex;
+          isAnimating = false;
+        }
+      })
+        .to(avatarFront, {
+          opacity: 1,
+          filter: "blur(0px) grayscale(0.3) contrast(1.05)",
+          duration: 0.8,
+          ease: "power2.inOut"
+        });
+    }
+
+    setInterval(dreamSwap, 3500);
+  }
+
+  startAvatarCycle(".avatar-back", ".avatar-front");
+  startAvatarCycle(".topbar-avatar-back", ".topbar-avatar-front");
 });
 
 function getPreciseAge(birthDate) {
@@ -320,7 +489,7 @@ function moveTooltip(anchor, tooltip) {
 
 function copyEmail(event) {
   if (event) event.preventDefault();
-  navigator.clipboard.writeText("chiki.monk3y@gmail.com");
+  navigator.clipboard.writeText("badruddoza.kaif@gmail.com");
 
   const link = event && event.currentTarget;
   if (!link) return;

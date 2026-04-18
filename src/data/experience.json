@@ -1,0 +1,99 @@
+{
+  "experienceSection": {
+    "label": "Experience",
+    "layout": {
+      "experienceGroup": {
+        "kicker": "Built",
+        "title": "Experience",
+        "description": "Product, platform, and applied AI work across startups and production systems.",
+        "items": [
+          {
+            "title": "Software Engineer",
+            "badge": "Now",
+            "organization": "Yobo AI",
+            "location": "Ontario, Canada (Remote)",
+            "date": "Dec 2024 — Present",
+            "tech": ["Python", "React", "Next", "OpenAI", "Twilio", "FastAPI", "Firebase", "GCP", "Supabase"],
+            "description": "Architect and deploy full-stack web systems, from AI-driven restaurant operations to internal developer tooling, with a strong focus on scalable APIs, agent infrastructure, and real-time voice workflows."
+          },
+          {
+            "title": "Software Development Engineer",
+            "date": "Feb 2024 — Dec 2024",
+            "organization": "MegaMind Tech",
+            "location": "Ontario, Canada (Remote)",
+            "tech": ["Python", "TensorFlow", "YOLO", "Jetson Nano", "OpenCV", "MongoDB", "Redis"],
+            "description": "Led a large-scale refactor across core systems, redesigned the UI layer with Eel, and shipped computer-vision and analytics features that improved kiosk performance, usability, and maintainability."
+          },
+          {
+            "title": "Software Development Engineer Intern",
+            "date": "Oct 2023 — Feb 2024",
+            "organization": "MegaMind Tech",
+            "location": "Ontario, Canada (Remote)",
+            "tech": ["Python", "ONNX", "Machine Learning", "PyTorch"],
+            "description": "Built kiosk management dashboards and trained a wake-word ONNX model that reached 99.48% real-time accuracy, helping solve a key voice activation problem."
+          }
+        ]
+      },
+      "leadershipGroup": {
+        "kicker": "Led",
+        "title": "Leadership",
+        "description": "Teaching, mentoring, and creative direction outside the core engineering track.",
+        "items": [
+          {
+            "tag": "Mental Health",
+            "date": "Apr 2021 — Present",
+            "title": "Co-Founder",
+            "organization": "Amra Shunbo",
+            "location": "Bangladesh"
+          },
+          {
+            "tag": "Stanford",
+            "date": "Apr 2024 — Jun 2024",
+            "title": "Section Leader",
+            "organization": "Code in Place — Stanford University",
+            "location": "Remote"
+          },
+          {
+            "tag": "Publications",
+            "date": "Apr 2023 — Jun 2024",
+            "title": "President of Publications",
+            "organization": "Notre Dame Information Technology Club",
+            "location": "Dhaka, Bangladesh"
+          },
+          {
+            "tag": "Math Club",
+            "date": "Jul 2023 — May 2024",
+            "title": "Vice President, Dept. of IT",
+            "organization": "Notre Dame Math Club",
+            "location": "Dhaka, Bangladesh"
+          },
+          {
+            "tag": "Technology",
+            "date": "Jun 2020 — Oct 2021",
+            "title": "General Secretary",
+            "organization": "Ideal Association of Informatics and Technology - IAIT",
+            "location": "Bangladesh"
+          }
+        ]
+      },
+      "sidebar": {
+        "kicker": "Featured",
+        "title": "Achievements",
+        "items": [
+          {
+            "title": "Champion",
+            "meta": "MegaMind Tech AI Contest · 2023",
+            "icon": "solar:cup-star-bold",
+            "url": "https://www.thedailystar.net/campus/campus/news/megamind-tech-hosts-ai-contest-3378996"
+          },
+          {
+            "title": "5th Crew Award",
+            "meta": "4th KRPC by JAXA · 2023",
+            "icon": "solar:medal-ribbons-star-bold",
+            "url": "https://www.prothomalo.com/education/higher-education/m4738ckuki"
+          }
+        ]
+      }
+    }
+  }
+}

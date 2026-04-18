@@ -7,8 +7,8 @@ import "../styles/global.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="bokaif — dev, designer, dumbest being" />
-    <title>bokaif</title>
+    <meta name="description" content="Badruddoza Kaif — dev, designer, dumbest being" />
+    <title>Badruddoza Kaif</title>
     <link rel="icon" type="image/svg+xml" href="/images/bokaif.svg" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js" defer></script>
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js" defer></script>
@@ -17,26 +17,35 @@ import "../styles/global.css";
     <div id="window">
       <div id="random-photos"></div>
       <header id="topbar">
+        <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+          <clipPath id="topbar-squircle" clipPathUnits="objectBoundingBox">
+            <path d="M 0.5 0 C 0.875 0, 1 0.125, 1 0.5 C 1 0.875, 0.875 1, 0.5 1 C 0.125 1, 0 0.875, 0 0.5 C 0 0.125, 0.125 0, 0.5 0 Z" />
+          </clipPath>
+        </svg>
         <a href="#hero" class="topbar-logo">
-          <img src="/images/bokaif.svg" alt="bokaif" draggable="false" />
+          <span class="topbar-logo-avatar" aria-hidden="true">
+            <img src="/images/1.png" alt="" class="topbar-avatar-back" />
+            <img src="/images/1.png" alt="" class="topbar-avatar-front" />
+          </span>
+          <span>bokaif.</span>
         </a>
         <div class="topbar-right">
-          <a href="#" id="topbar-email-link" aria-label="Copy email" class="social-pill">
-            <span class="iconify email-icon" data-icon="mdi:email" data-inline="false"></span>
+          <a href="#" id="topbar-email-link" aria-label="Copy email" class="social-pill icon-pill">
+            <img src="/icons/email-custom.svg" alt="" class="custom-social-icon email-icon" />
             <span class="iconify check-icon" data-icon="lucide:clipboard-copy" data-inline="false" style="display: none;"></span>
           </a>
-          <a href="https://github.com/bokaif" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-pill">
-            <span class="iconify" data-icon="mdi:github"></span>
+          <a href="https://github.com/bokaif" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-pill icon-pill">
+            <img src="/icons/github-custom.svg" alt="" class="custom-social-icon" />
           </a>
-          <a href="https://linkedin.com/in/bokaif" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-pill">
-            <span class="iconify" data-icon="mdi:linkedin"></span>
+          <a href="https://linkedin.com/in/bokaif" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-pill icon-pill">
+            <img src="/icons/linkedin-custom.svg" alt="" class="custom-social-icon" />
           </a>
-          <a href="https://behance.net/bokaif" target="_blank" rel="noopener noreferrer" aria-label="Behance" class="social-pill">
-            <span class="iconify" data-icon="mdi:behance"></span>
+          <a href="https://behance.net/bokaif" target="_blank" rel="noopener noreferrer" aria-label="Behance" class="social-pill icon-pill text-icon-pill">
+            <span>be</span>
           </a>
           <span class="separator">|</span>
           <a href="#" id="topbar-resume" target="_blank" rel="noopener noreferrer" class="social-pill" aria-label="Resume">
-            <span class="iconify" data-icon="mdi:file-document-outline"></span>
+            <span class="iconify resume-link-icon resume-link-icon-light" data-icon="lucide:file-text" data-inline="false"></span>
           </a>
         </div>
       </header>
@@ -44,7 +53,6 @@ import "../styles/global.css";
         <slot />
       </main>
       <div class="nav-wrapper">
-        <div class="nav-cutout"></div>
         <nav id="floating-nav" class="floating-nav" aria-label="Portfolio sections">
           <a href="#about">about</a>
           <a href="#experience">experience</a>

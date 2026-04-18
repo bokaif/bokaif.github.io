@@ -1,9 +1,106 @@
+---
+import data from "../data/experience.json";
+
+const { experienceSection } = data;
+const { experienceGroup, leadershipGroup, sidebar } = experienceSection.layout;
+---
+
 <section class="panel section-card">
-  <p class="section-label">lore</p>
-  <h2 class="section-title">timeline</h2>
-  <div class="timeline">
-    <div class="timeline-item"><span>2004</span><p>spawned into the world. instantly opinionated.</p></div>
-    <div class="timeline-item"><span>teen years</span><p>found code and design. broke stuff to learn fast.</p></div>
-    <div class="timeline-item"><span>now</span><p>shipping products, pixels, and questionable midnight ideas.</p></div>
+  <div class="section-label-row">
+    <span class="section-label-dot"></span>
+    <span class="section-label-text">{experienceSection.label}</span>
+  </div>
+
+  <div class="experience-layout">
+    <div class="experience-main">
+      <div class="experience-group">
+        <div class="experience-group-heading">
+          <span class="experience-group-kicker">{experienceGroup.kicker}</span>
+          <h2>{experienceGroup.title}</h2>
+          <p>{experienceGroup.description}</p>
+        </div>
+
+        <div class="timeline">
+          {experienceGroup.items.map((item, index) => (
+            <div class="timeline-entry">
+              <div class="timeline-marker">
+                <span class:list={["timeline-dot", { "active-dot": index === 0 }]}></span>
+                {index < experienceGroup.items.length - 1 && <span class="timeline-line"></span>}
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <h3>{item.title}</h3>
+                  {item.badge ? (
+                    <span class="timeline-badge">{item.badge}</span>
+                  ) : (
+                    <span class="timeline-date">{item.date}</span>
+                  )}
+                </div>
+                <p class="timeline-org">{item.organization} · {item.location} · {item.date}</p>
+                <div class="timeline-tech" aria-label="Tech stack">
+                  {item.tech.map((tech) => <span>{tech}</span>)}
+                </div>
+                <p class="timeline-desc">{item.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="experience-group leadership-group">
+        <div class="experience-group-heading">
+          <span class="experience-group-kicker">{leadershipGroup.kicker}</span>
+          <h2>{leadershipGroup.title}</h2>
+          {leadershipGroup.description && <p>{leadershipGroup.description}</p>}
+        </div>
+
+        <div class="leadership-grid">
+          {leadershipGroup.items.map((item) => (
+            <article class="leadership-card">
+              <div class="leadership-card-top">
+                <span class="leadership-tag">{item.tag}</span>
+                <span class="leadership-date">{item.date}</span>
+              </div>
+              <h3>{item.title}</h3>
+              <p class="leadership-org">{item.organization} · {item.location}</p>
+              {item.tech && (
+                <div class="leadership-tech" aria-label="Skills">
+                  {item.tech.map((tech) => <span>{tech}</span>)}
+                </div>
+              )}
+              {item.description && <p class="leadership-desc">{item.description}</p>}
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <aside class="experience-sidebar">
+      <div class="experience-note">
+        <span class="experience-note-kicker">{sidebar.kicker}</span>
+        <h3>{sidebar.title}</h3>
+        <div class="award-list">
+          {sidebar.items.map((item) => (
+            <article class="award-item">
+              <div class="award-item-top">
+                <span class="award-icon">
+                  <span class="iconify" data-icon={item.icon}></span>
+                </span>
+                <div class="award-copy">
+                  <p class="award-title">{item.title}</p>
+                  <p class="award-meta">{item.meta}</p>
+                  {item.url && (
+                <a href={item.url} target="_blank" rel="noopener noreferrer" class="award-link">
+                  Read feature
+                  <span class="iconify" data-icon="lucide:external-link" data-inline="false"></span>
+                </a>
+              )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </aside>
   </div>
 </section>
