@@ -7,20 +7,14 @@ const MAX_TECH_TAGS = 5;
 ---
 
 <section class="panel section-card">
-  <div class="section-label-row">
-    <span class="section-label-dot"></span>
-    <span class="section-label-text">{experienceSection.label}</span>
+  <div class="section-title-stack">
+    <p class="group-title">{experienceSection.label}</p>
+    <p>{experienceGroup.description}</p>
   </div>
 
   <div class="experience-layout">
     <div class="experience-main">
       <div class="experience-group">
-        <div class="experience-group-heading">
-          <span class="experience-group-kicker">{experienceGroup.kicker}</span>
-          <h2>{experienceGroup.title}</h2>
-          <p>{experienceGroup.description}</p>
-        </div>
-
         <div class="timeline">
           {experienceGroup.items.map((item, index) => {
             const hiddenTechCount = Math.max(0, item.tech.length - MAX_TECH_TAGS);
@@ -38,7 +32,7 @@ const MAX_TECH_TAGS = 5;
                     {item.badge ? (
                       <span class="timeline-badge">{item.badge}</span>
                     ) : (
-                      <span class="timeline-date">{item.date}</span>
+                      <span class="timeline-date"></span>
                     )}
                   </div>
                   <p class="timeline-org">{item.organization} · {item.location} · {item.date}</p>
@@ -69,8 +63,7 @@ const MAX_TECH_TAGS = 5;
 
       <div class="experience-group leadership-group">
         <div class="experience-group-heading">
-          <span class="experience-group-kicker">{leadershipGroup.kicker}</span>
-          <h2>{leadershipGroup.title}</h2>
+          <p class="group-title">{leadershipGroup.title}</p>
           {leadershipGroup.description && <p>{leadershipGroup.description}</p>}
         </div>
 
@@ -99,8 +92,7 @@ const MAX_TECH_TAGS = 5;
 
     <aside class="experience-sidebar">
       <div class="experience-note">
-        <span class="experience-note-kicker">{sidebar.kicker}</span>
-        <h3>{sidebar.title}</h3>
+        <p class="group-title">{sidebar.title}</p>
         <div class="award-list">
           {sidebar.items.map((item) => (
             <article class="award-item">

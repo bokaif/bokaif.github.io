@@ -1,50 +1,78 @@
+---
+const educationItems = [
+  {
+    period: "2024 — 2027",
+    school: "BRAC University",
+    program: "Bachelor of Science, Computer Science",
+    activities: "Computer Club, Research Club",
+  },
+  {
+    period: "2022 — 2023",
+    school: "Notre Dame College",
+    program: "Science",
+    activities: "Technology Club, Math Club",
+  },
+  {
+    period: "2011 — 2021",
+    school: "Ideal School and College",
+    program: "Science",
+    activities: "Scout, Technology Club",
+  },
+];
+---
+
 <section class="panel section-card">
-  <div class="section-label-row">
-    <span class="section-label-dot"></span>
-    <span class="section-label-text">About</span>
+  <div class="section-title-stack">
+    <p class="group-title">About</p>
   </div>
 
-  <div class="about-lead">
-    <p>I'm Kaif — I build things at the edge of <strong>code</strong> and <strong>design</strong>. Not because it looks cool on a portfolio, but because I genuinely can't stop.</p>
-  </div>
-
-  <div class="about-columns">
-    <div class="about-col">
-      <p>Currently a Software Engineer at <strong>Yobo AI</strong>, architecting full-stack AI systems for restaurant operations. Before that, built interactive kiosk software at <strong>MegaMind Tech</strong> and taught Stanford's CS106A as a Section Leader.</p>
-      <p>When I'm not writing code, I'm probably overthinking a font choice or arguing with myself about spacing.</p>
-    </div>
-    <div class="about-col about-col-photo">
-      <div class="about-photo-frame">
-        <img src="/images/1.png" alt="Kaif" draggable="false" />
+  <div class="about-grid">
+    <div class="about-copy">
+      <p class="about-lead">
+        Hi, I'm <span class="about-name">Kaif</span>. I design and build systems that are reliable and easy to use.
+      </p>
+      <div class="about-body">
+        <p>
+          I work mostly around <strong>applied AI</strong> and <strong>product engineering</strong>, with a focus on delivering polished systems.
+        </p>
+        <p>
+          Currently, I'm studying <strong>Computer Science</strong> at <strong>BRAC University</strong>, set to graduate in late 2027.
+        </p>
+        <p>
+          Previously, I started working as a software engineer right after high school. I learned by building things end to end and debugging my way through them. That's still how I approach engineering.
+        </p>
       </div>
     </div>
+
+    <aside class="about-visual" aria-label="Portrait">
+      <div class="about-visual-card">
+        <div class="about-visual-backdrop" aria-hidden="true"></div>
+        <div class="about-visual-frame">
+          <img src="/images/5.png" alt="Portrait of Badruddoza Kaif" />
+        </div>
+      </div>
+    </aside>
   </div>
 
-  <div class="about-meta-row">
-    <div class="about-meta-item">
-      <span class="iconify" data-icon="solar:square-academic-cap-bold-duotone"></span>
-      <div class="about-meta-text">
-        <span class="about-meta-primary">BRAC University</span>
-        <span class="about-meta-secondary">BSc in CS · 3.63 CGPA · Expected 2027</span>
-      </div>
+  <div class="about-education">
+    <div class="about-education-heading">
+      <p class="group-title">Education</p>
     </div>
-    <div class="about-meta-item">
-      <span class="iconify" data-icon="solar:map-point-bold-duotone"></span>
-      <div class="about-meta-text">
-        <span class="about-meta-primary">Dhaka, Bangladesh</span>
-        <span class="about-meta-secondary">UTC+6 · Open to remote</span>
-      </div>
-    </div>
-  </div>
 
-  <div class="about-actions">
-    <a href="mailto:badruddoza.kaif@gmail.com" class="about-action-btn about-action-ghost">
-      <span class="iconify" data-icon="solar:letter-bold-duotone"></span>
-      Say Hi
-    </a>
-    <a href="https://your-resume-link-here.com" target="_blank" rel="noopener noreferrer" class="about-action-btn about-action-solid">
-      <span class="iconify" data-icon="lucide:file-user"></span>
-      Résumé
-    </a>
+    <div class="about-education-list">
+      {educationItems.map((item) => (
+        <article class="about-education-item">
+          <p class="about-education-period">{item.period}</p>
+          <div class="about-education-copy">
+            <p class="about-education-school">{item.school}</p>
+            <p class="about-education-program">{item.program}</p>
+          </div>
+          <div class="about-education-side">
+            <p class="about-education-side-label">Clubs & societies</p>
+            <p class="about-education-activities">{item.activities}</p>
+          </div>
+        </article>
+      ))}
+    </div>
   </div>
 </section>

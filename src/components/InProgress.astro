@@ -1,0 +1,47 @@
+---
+const items = [
+  {
+    title: "Laboon",
+    summary: "Social platform for connecting university students.",
+    stack: ["Next.js", "React", "TypeScript", "Tailwind", "Supabase"],
+    note: "currently building",
+  },
+  {
+    title: "PyBiometric",
+    summary: "Full-fledged Python package for biometric registration and verification using the Win32 API.",
+    stack: ["Python", "Ctypes", "Win32 API"],
+    note: "currently building",
+  },
+];
+---
+
+<section class="panel section-card">
+  <div class="section-title-stack">
+    <p class="group-title">In Progress</p>
+    <p>A couple of things I am actively building right now.</p>
+  </div>
+
+  <div class="progress-grid">
+    {items.map((item) => (
+      <article class="project-card project-card-soon">
+        <div class="project-media project-media-soon" aria-hidden="true">
+          <span class="project-tag">Coming soon</span>
+          <div class="project-soon-surface">
+            <div class="project-placeholder">
+              <span>{item.note}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-content">
+          <h3>{item.title}</h3>
+          <p>{item.summary}</p>
+
+          <div class="project-tech" aria-label={`${item.title} stack`}>
+            {item.stack.map((tech) => <span>{tech}</span>)}
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

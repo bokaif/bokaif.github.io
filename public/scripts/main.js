@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const isMobileViewport = window.matchMedia("(max-width: 640px)").matches;
+  const supportsFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
   grained("#window", {
     animate: true,
     patternWidth: 150,
@@ -9,33 +12,124 @@ document.addEventListener("DOMContentLoaded", () => {
     grainHeight: 1,
   });
 
-  gsap.set("#window", {
-    scale: 0,
-    borderRadius: "50%",
-    xPercent: -50,
-    yPercent: -50,
-  });
-  gsap.set("#m_group", { opacity: 0, yPercent: 50 });
-  gsap.set("#main-scroll", { opacity: 0 });
-
-  gsap
-    .timeline()
-    .to("#window", {
+  if (isMobileViewport) {
+    gsap.set("#window", {
+      clearProps: "transform",
       scale: 1,
-      borderRadius: "48px",
-      duration: 1,
-      ease: "power2.out",
-    })
-    .to(
-      "#main-scroll",
-      { opacity: 1, duration: 0.3 },
-      "-=0.3"
-    )
-    .to(
-      "#m_group",
-      { yPercent: 0, opacity: 1, duration: 0.5, ease: "power2.out" },
-      "-=0.2"
-    );
+      borderRadius: 0,
+      xPercent: 0,
+      yPercent: 0,
+    });
+    gsap.set("#m_group", { opacity: 1, yPercent: 0 });
+    gsap.set("#main-scroll", { opacity: 1 });
+  } else {
+    gsap.set("#window", {
+      scale: 0,
+      borderRadius: "50%",
+      xPercent: -50,
+      yPercent: -50,
+    });
+    gsap.set("#m_group", { opacity: 0, yPercent: 50 });
+    gsap.set("#main-scroll", { opacity: 0 });
+
+    gsap
+      .timeline()
+      .to("#window", {
+        scale: 1,
+        borderRadius: "36px",
+        duration: 1,
+        ease: "power2.out",
+      })
+      .to(
+        "#main-scroll",
+        { opacity: 1, duration: 0.3 },
+        "-=0.3"
+      )
+      .to(
+        "#m_group",
+        { yPercent: 0, opacity: 1, duration: 0.5, ease: "power2.out" },
+        "-=0.2"
+      );
+  }
+
+  const cursorRing = document.getElementById("cursor-ring");
+  if (!isMobileViewport && supportsFinePointer && cursorRing) {
+    let ringX = window.innerWidth / 2;
+    let ringY = window.innerHeight / 2;
+    let targetX = ringX;
+    let targetY = ringY;
+    let cursorVisible = false;
+
+    const interactiveSelector = [
+      "a",
+      "button",
+      "[role='button']",
+      ".timeline-tech-toggle",
+      ".gallery-summon",
+      "#lab-photo-button",
+      "#mood-button",
+      "#contact-email-button",
+      "#footer-email-link",
+      "#topbar-email-link",
+      "#resume-button",
+    ].join(", ");
+
+    let pulseTimeout = null;
+
+    const syncCursorHover = (target) => {
+      const interactiveTarget = target?.closest?.(interactiveSelector);
+      document.body.classList.toggle("cursor-link-hover", Boolean(interactiveTarget));
+    };
+
+    const pulseCursor = () => {
+      if (!cursorVisible) return;
+      document.body.classList.remove("cursor-click-pulse");
+      window.clearTimeout(pulseTimeout);
+      void cursorRing.offsetWidth;
+      document.body.classList.add("cursor-click-pulse");
+      pulseTimeout = window.setTimeout(() => {
+        document.body.classList.remove("cursor-click-pulse");
+      }, 340);
+    };
+
+    const renderCursor = () => {
+      ringX += (targetX - ringX) * 0.34;
+      ringY += (targetY - ringY) * 0.34;
+      cursorRing.style.setProperty("--cursor-x", `${ringX}px`);
+      cursorRing.style.setProperty("--cursor-y", `${ringY}px`);
+      cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+      requestAnimationFrame(renderCursor);
+    };
+
+    document.addEventListener("mousemove", (event) => {
+      targetX = event.clientX;
+      targetY = event.clientY;
+      if (!cursorVisible) {
+        cursorVisible = true;
+        document.body.classList.add("cursor-ready");
+      }
+      syncCursorHover(event.target);
+    }, { passive: true });
+
+    document.addEventListener("mouseover", (event) => {
+      syncCursorHover(event.target);
+    });
+
+    document.addEventListener("mouseout", (event) => {
+      if (event.relatedTarget) return;
+      document.body.classList.remove("cursor-ready", "cursor-link-hover");
+      cursorVisible = false;
+    });
+
+    window.addEventListener("blur", () => {
+      document.body.classList.remove("cursor-ready", "cursor-link-hover");
+      cursorVisible = false;
+    });
+
+    window.addEventListener("pointerdown", pulseCursor, { passive: true });
+
+    renderCursor();
+  }
 
   const scrollRoot = document.getElementById("main-scroll");
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
@@ -288,10 +382,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const cycleElement = document.querySelector(".cycle");
   const funFacts = [
-    "Software Engineer @Yobo AI",
+    "Software Engineer",
     "CS @BRAC University",
-    "Stanford Section Leader",
-    "Kibo Robot Challenge Champion",
   ];
   let cycleIndex = 1;
   if (cycleElement) {
@@ -303,7 +395,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cycleElement.style.opacity = "1";
         cycleIndex = (cycleIndex + 1) % funFacts.length;
       }, 250);
-    }, 2400);
+    }, 3000);
   }
 
   const randomPhotosLayer = document.getElementById("random-photos");
@@ -434,10 +526,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  function startAvatarCycle(backSelector, frontSelector) {
+  function startAvatarCycle(backSelector, frontSelector, options = {}) {
     const avatarBack = document.querySelector(backSelector);
     const avatarFront = document.querySelector(frontSelector);
     if (!avatarBack || !avatarFront) return;
+
+    const {
+      blurAmount = 14,
+      duration = 0.8,
+      filterTail = "grayscale(0.3) contrast(1.05)",
+    } = options;
 
     let avatarIndex = 0;
     let isAnimating = false;
@@ -460,7 +558,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gsap.killTweensOf([avatarBack, avatarFront]);
       gsap.set(avatarFront, {
         opacity: 0,
-        filter: "blur(14px) grayscale(0.3) contrast(1.05)",
+        filter: `blur(${blurAmount}px) ${filterTail}`,
         willChange: "opacity, filter"
       });
       gsap.set(avatarBack, { willChange: "opacity, filter" });
@@ -479,8 +577,8 @@ document.addEventListener("DOMContentLoaded", () => {
       })
         .to(avatarFront, {
           opacity: 1,
-          filter: "blur(0px) grayscale(0.3) contrast(1.05)",
-          duration: 0.8,
+          filter: `blur(0px) ${filterTail}`,
+          duration,
           ease: "power2.inOut"
         });
     }
@@ -488,8 +586,14 @@ document.addEventListener("DOMContentLoaded", () => {
     setInterval(dreamSwap, 3500);
   }
 
-  startAvatarCycle(".avatar-back", ".avatar-front");
-  startAvatarCycle(".topbar-avatar-back", ".topbar-avatar-front");
+  startAvatarCycle(".avatar-back", ".avatar-front", {
+    blurAmount: 14,
+    duration: 0.8,
+  });
+  startAvatarCycle(".topbar-avatar-back", ".topbar-avatar-front", {
+    blurAmount: 4,
+    duration: 0.45,
+  });
 });
 
 function getPreciseAge(birthDate) {

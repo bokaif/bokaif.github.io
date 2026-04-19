@@ -1,59 +1,76 @@
+---
+const projects = [
+  {
+    title: "StudySmart",
+    href: "https://github.com/bokaif/StudySmart",
+    tag: "Hackathon",
+    summary: "Grounded AI learning platform for university courses with chat, retrieval, digitization, and analytics.",
+    tech: ["Next.js", "FastAPI", "Firebase", "ChromaDB", "Gemini"],
+    image: "/images/projects/studysmart.webp",
+  },
+  {
+    title: "Mimic Me",
+    href: "https://github.com/bokaif/mimic-me",
+    tag: "Automation",
+    summary: "Brutalist desktop macro tool for recording, replaying, and saving repetitive keyboard and mouse workflows.",
+    tech: ["Python", "CustomTkinter", "Tkinter", "Pynput"],
+    image: "/images/projects/mimic-me.webp",
+  },
+  {
+    title: "Landsat Lens",
+    href: "https://github.com/bokaif/landsat-lens",
+    tag: "NASA",
+    summary: "Web app for tracking Landsat passes, viewing reflectance overlays, and sending next-pass reminders.",
+    tech: ["React", "TypeScript", "Flask", "Leaflet", "Skyfield"],
+    image: "/images/projects/landsat-lens.webp",
+  },
+  {
+    title: "Astrobee Controller",
+    href: "https://github.com/bokaif/astrobee-controller",
+    tag: "JAXA",
+    summary: "ISS robotics project using quaternion movement, tool detection, and AR-code mission execution on Astrobee.",
+    tech: ["Java", "TensorFlow", "OpenCV", "ZXing", "Gradle"],
+    image: "/images/projects/krpc.webp",
+  },
+  {
+    title: "WhyFakeIt",
+    href: "https://github.com/bokaif/whyfakeit",
+    tag: "NLP",
+    summary: "Bangla fake news detection system for classifying misinformation through a lightweight web interface.",
+    tech: ["Python", "NLP", "Flask", "HTML", "JavaScript"],
+    image: "/images/projects/whyfakeit.webp",
+  },
+];
+---
+
 <section class="panel section-card">
-  <div class="section-label-row">
-    <span class="section-label-dot"></span>
-    <span class="section-label-text">Projects</span>
+  <div class="section-title-stack">
+    <p class="group-title">Projects</p>
+    <p>Selected work across AI systems, automation, space tech, and language tools.</p>
   </div>
 
   <div class="projects-grid">
-    <a href="#" class="project-card project-featured">
-      <div class="project-top">
-        <span class="iconify project-icon" data-icon="solar:planet-bold-duotone"></span>
-        <span class="project-tag">NASA</span>
-      </div>
-      <h3>Landsat Lens</h3>
-      <p>Visualized real-time Landsat satellite paths using NASA Celestrak data and interactive Leaflet maps, with email alerts for upcoming passes.</p>
-      <div class="project-tech">
-        <span>Python</span>
-        <span>Flask</span>
-        <span>React</span>
-        <span>Firebase</span>
-        <span>Leaflet</span>
-      </div>
-    </a>
+    {projects.map((project) => (
+      <a href={project.href} target="_blank" rel="noopener noreferrer" class="project-card">
+        <div class="project-media">
+          <span class="project-tag">{project.tag}</span>
+          <img src={project.image} alt={`${project.title} preview`} loading="lazy" />
+        </div>
 
-    <a href="#" class="project-card">
-      <div class="project-top">
-        <span class="iconify project-icon" data-icon="solar:rocket-bold-duotone"></span>
-        <span class="project-tag">JAXA</span>
-      </div>
-      <h3>Astrobee Controller</h3>
-      <p>Controlled Astrobee robot movement using Quaternions on the ISS via KIBO API. Trained a TensorFlow model to detect 8 tools + AR codes.</p>
-      <div class="project-tech">
-        <span>Java</span>
-        <span>TensorFlow</span>
-        <span>Docker</span>
-        <span>ZXing</span>
-      </div>
-    </a>
+        <div class="project-content">
+          <h3>
+            {project.title}
+            <span class="project-open-link" aria-hidden="true">
+              <span class="iconify" data-icon="lucide:arrow-up-right" data-inline="false"></span>
+            </span>
+          </h3>
+          <p>{project.summary}</p>
 
-    <a href="https://bokaif.github.io" class="project-card">
-      <div class="project-top">
-        <span class="iconify project-icon" data-icon="solar:code-bold-duotone"></span>
-      </div>
-      <h3>Portfolio v2</h3>
-      <p>This site. A bespoke portfolio with grain textures, squircle avatars, and dreamy GSAP transitions.</p>
-      <div class="project-tech">
-        <span>Astro</span>
-        <span>GSAP</span>
-        <span>Vanilla CSS</span>
-      </div>
-    </a>
-
-    <a href="#" class="project-card project-cta-card">
-      <div class="project-cta-inner">
-        <span class="iconify" data-icon="solar:add-circle-bold-duotone"></span>
-        <p>More coming soon</p>
-      </div>
-    </a>
+          <div class="project-tech">
+            {project.tech.map((item) => <span>{item}</span>)}
+          </div>
+        </div>
+      </a>
+    ))}
   </div>
 </section>

@@ -3,16 +3,14 @@
     "label": "Experience",
     "layout": {
       "experienceGroup": {
-        "kicker": "Built",
         "title": "Experience",
         "description": "Product, platform, and applied AI work across startups and production systems.",
         "items": [
           {
             "title": "Software Engineer",
-            "badge": "Now",
             "organization": "Yobo AI",
             "location": "Ontario, Canada (Remote)",
-            "date": "Dec 2024 — Present",
+            "date": "Dec 2024 — Mar 2026",
             "tech": ["Python", "React", "Next", "OpenAI", "Twilio", "FastAPI", "Firebase", "GCP", "Supabase"],
             "description": "Architect and deploy full-stack web systems, from AI-driven restaurant operations to internal developer tooling, with a strong focus on scalable APIs, agent infrastructure, and real-time voice workflows.",
             "highlights": [
@@ -50,13 +48,12 @@
         ]
       },
       "leadershipGroup": {
-        "kicker": "Led",
         "title": "Leadership",
         "description": "Teaching, mentoring, and creative direction outside the core engineering track.",
         "items": [
           {
             "tag": "Non-Profit",
-            "date": "Apr 2021 — Present",
+            "date": "Apr 2021 — Jul 2025",
             "title": "Co-Founder",
             "organization": "Amra Shunbo",
             "description": "Co-founded Bangladesh's first P2P anonymous mental health support platform."
@@ -73,7 +70,7 @@
             "date": "Apr 2023 — Jun 2024",
             "title": "President, Dept. of Publications",
             "organization": "Notre Dame Information Technology Club",
-            "description": "Led design & content wing of club."
+            "description": "Led design & content wing of the club."
           },
           {
             "tag": "Math Club",
@@ -83,7 +80,7 @@
             "description": "Directed IT and logistics for club activities."
           },
           {
-            "tag": "Technology",
+            "tag": "IT Club",
             "date": "Jun 2020 — Oct 2021",
             "title": "General Secretary",
             "organization": "Ideal Association of Informatics & Technology",
@@ -92,7 +89,6 @@
         ]
       },
       "sidebar": {
-        "kicker": "Featured",
         "title": "Achievements",
         "items": [
           {
